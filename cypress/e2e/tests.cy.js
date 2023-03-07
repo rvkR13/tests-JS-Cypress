@@ -54,4 +54,17 @@ it(`клик по иконки выпадающего списка и выбор
   cy.get(".tm-our-projects__items").should("be.visible");
   cy.get('[href="https://freelance.habr.com?utm_source=habr&utm_medium=habr_top_panel"]').should("be.visible").click();
 }); 
-}); 
+
+  it('редирект на страницу "https://freelance.habr.com/"',()=>{
+    cy.viewport(1920,1080)
+    cy.visit('https://habr.com/ru/all/');
+    cy.get(".tm-header__icon_dropdown").click();
+    cy.get('[href="https://freelance.habr.com?utm_source=habr&utm_medium=habr_top_panel"]').should("be.visible").click()
+    .first().then(($a)=>{
+        const newUrl =  ('https://freelance.habr.com/'); 
+        cy.visit(newUrl);
+        cy.get('[aria-label="Хабр Фриланс"]').should("be.visible");
+      })
+    })
+})
+
