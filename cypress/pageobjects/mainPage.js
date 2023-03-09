@@ -5,7 +5,7 @@ export class MainPage {
   /*
    **метод проверки заголовка на главной странице
    */
-  visibleLogo = () => cy.get(this.logo).contains("Хабр").should("be.visible");
+  logoIsVisible = () => cy.get(this.logo).contains("Хабр").should("be.visible");
   /*
    **метод проверки текста в шапке на главной странице
    */
@@ -30,26 +30,18 @@ export class MainPage {
   checkUrl(urls) {
     cy.url().should("include", urls);
   }
+
   /*
-   **метод проверки что 'URL' соответствует ожидаемому
-   */
-   checkUrl(urls) {
-    cy.url().should("include", urls);
-  }
- /*
    **метод поиска элементy и нажатие по нему
    */
-   searchAndClick(elements){
-   cy.get(elements).click();
-}
+  searchAndClick(elements) {
+    cy.get(elements).click();
+  }
 
-/*
+  /*
    **метод проверки видимости элемента
    */
-   elementPresents(element,text) {
+  elementPresents(element, text) {
     cy.get(element).should("be.visible");
   }
-
-
-  }
-  
+}
