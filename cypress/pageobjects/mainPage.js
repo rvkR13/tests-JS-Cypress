@@ -2,6 +2,7 @@ export class MainPage {
   logo = ".tm-header__logo-wrap";
   headerСontainer = ".tm-header__container";
   baseLayoutHeader = ".tm-base-layout__header";
+  
   /*
    **метод проверки заголовка на главной странице
    */

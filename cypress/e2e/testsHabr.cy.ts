@@ -2,7 +2,6 @@ import { MainPage } from "../pageobjects/MainPage";
 
 describe("Example test suite", () => {
   const mainPage = new MainPage();
-  const baseLayoutHeader = ".tm-base-layout__header";
   const headerСontainer = ".tm-header__container";
   const iconDropDown = ".tm-header__icon_dropdown";
   const item = ".tm-our-projects__items";
@@ -49,16 +48,12 @@ describe("Example test suite", () => {
     cy.get(item).should("be.visible");
   });
 
-  it.only('редирект на страницу "https://freelance.habr.com/"', () => {
-   
+  it('редирект на страницу "https://freelance.habr.com/"', () => {
     mainPage.searchAndClick(iconDropDown);
-    
     mainPage.searchHrefAndClick(
       '"https://freelance.habr.com?utm_source=habr&utm_medium=habr_top_panel"'
     );
     cy.visit(newUrl);
-    cy.intercept("GET", "https://freelance.habr.com/");
     cy.getAriaLabel(`"Хабр Фриланс"`).should("be.visible");
-    cy.intercept("");
   });
 });
