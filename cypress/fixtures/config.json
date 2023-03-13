@@ -1,3 +1,4 @@
 {
-  "baseUrl": "https://habr.com/ru/all/"
+  "habrUrl": "https://habr.com/ru/all/",
+  "freelanceHabrUrl": "https://freelance.habr.com/"
 }

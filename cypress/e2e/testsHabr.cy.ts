@@ -1,6 +1,7 @@
 import { MainPage } from "../pageobjects/MainPage";
+import { config } from "chai";
 
-describe("Example test suite", () => {
+describe("Habr test suite", () => {
   const mainPage = new MainPage();
   const headerСontainer = ".tm-header__container";
   const iconDropDown = ".tm-header__icon_dropdown";
@@ -8,9 +9,21 @@ describe("Example test suite", () => {
   const logo = ".tm-header__logo-wrap";
   const newUrl = "https://freelance.habr.com/";
 
+  var dataTests = [
+    { args: "Все потоки" },
+    { args: "Разработка" },
+    { args: "Администрирование" },
+    { args: "Дизайн" },
+    { args: "Менеджмент" },
+    { args: "Маркетинг" },
+    { args: "Научпоп" },
+  ];
+
   beforeEach(() => {
-    cy.viewport(1920, 1080);
-    cy.visit("https://habr.com/ru/all/");
+    cy.fixture("config").then((data) => {
+      cy.viewport(1920, 1080);
+      cy.visit(data.habrUrl);
+    });
   });
 
   it(`Проверка хедера habr.com на наличие заголовков "Хабр"`, () => {
@@ -24,14 +37,10 @@ describe("Example test suite", () => {
     mainPage.elementPresents(headerСontainer, "Неделя фронтенда");
   });
 
-  it(`В меню хедера должен быть отображен заголовок "Все потоки","Разработка","Администрирование","Дизайн","Менеджмент","Маркетинг","Научпоп"`, () => {
-    mainPage.textPresentHeadMenu("Все потоки");
-    mainPage.textPresentHeadMenu("Разработка");
-    mainPage.textPresentHeadMenu("Администрирование");
-    mainPage.textPresentHeadMenu("Дизайн");
-    mainPage.textPresentHeadMenu("Менеджмент");
-    mainPage.textPresentHeadMenu("Маркетинг");
-    mainPage.textPresentHeadMenu("Научпоп");
+  it.only('В меню хедера должен быть отображен заголовок "Все потоки","Разработка","Администрирование","Дизайн","Менеджмент","Маркетинг","Научпоп"', () => {
+    dataTests.forEach(function (run) {
+      mainPage.textPresentHeadMenu(run.args);
+    });
   });
 
   it(`При нажатии на заголовок "Разработка" должен быть переход на страницу "Разработка"`, () => {
@@ -53,7 +62,7 @@ describe("Example test suite", () => {
     mainPage.searchHrefAndClick(
       '"https://freelance.habr.com?utm_source=habr&utm_medium=habr_top_panel"'
     );
-    cy.visit(newUrl);
+    cy.visit("https://freelance.habr.com/");
     cy.getAriaLabel(`"Хабр Фриланс"`).should("be.visible");
   });
 });
